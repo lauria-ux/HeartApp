@@ -6,7 +6,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
@@ -42,6 +42,7 @@ function clamp(v: number, min: number, max: number) {
 
 export default function CaptureScreen() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const { mode, facing } = useLocalSearchParams<{
     mode: MeasurementMode;
     facing: CameraFacing;
@@ -206,9 +207,11 @@ export default function CaptureScreen() {
   };
 
   // ─── Render: permission denied ──
+  const safeStyle = { paddingTop: insets.top, paddingBottom: insets.bottom };
+
   if (permissionDenied) {
     return (
-      <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
+      <View style={[styles.container, safeStyle]}>
         <View style={styles.centred}>
           <Ionicons name="camera-outline" size={48} color={Colors.textTertiary} />
           <Text style={styles.permTitle}>Camera Access Required</Text>
@@ -219,24 +222,24 @@ export default function CaptureScreen() {
         <TouchableOpacity style={styles.cancelBtnFull} onPress={handleCancel}>
           <Text style={styles.cancelBtnText}>Go Back</Text>
         </TouchableOpacity>
-      </SafeAreaView>
+      </View>
     );
   }
 
   // ─── Render: no device ──
   if (!device) {
     return (
-      <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
+      <View style={[styles.container, safeStyle]}>
         <View style={styles.centred}>
           <Text style={styles.permText}>Camera device not found.</Text>
         </View>
-      </SafeAreaView>
+      </View>
     );
   }
 
   // ─── Render: main capture UI ──
   return (
-    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
+    <View style={[styles.container, safeStyle]}>
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={handleCancel} style={styles.cancelBtn}>
@@ -342,7 +345,7 @@ export default function CaptureScreen() {
             : 'Keep your face centred. Stay in good lighting.'}
         </Text>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
