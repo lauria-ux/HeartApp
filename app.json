@@ -1,20 +1,25 @@
 {
   "expo": {
-    "name": "HeartApp",
-    "slug": "HeartApp",
+    "name": "Cardia",
+    "slug": "cardia",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "heartapp",
+    "scheme": "cardia",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/images/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#0B1120"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Cardia uses your camera to measure heart rate and HRV using PPG technology. Your finger covers the lens during measurement.",
+        "NSMicrophoneUsageDescription": "Microphone access is not used by Cardia."
+      },
+      "bundleIdentifier": "com.anonymous.cardia"
     },
     "android": {
       "adaptiveIcon": {
@@ -30,7 +35,8 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-dev-client"
     ],
     "experiments": {
       "typedRoutes": true
