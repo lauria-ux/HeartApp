@@ -1,35 +1,35 @@
 export const Colors = {
-  // Backgrounds — ultra-clean, pure white with faint cool tint
-  background: '#F8FAFC',   // slate-50: clinical-clean without feeling cold
+  // Backgrounds — soft blue-white base, cards float above it
+  background: '#EEF2FF',   // indigo-50: warm blue tint like the reference
   card: '#FFFFFF',
-  cardAlt: '#F1F5F9',      // slate-100
-  surface: '#E2E8F0',      // slate-200
+  cardAlt: '#F5F7FF',
+  surface: '#E0E7FF',      // indigo-100
 
-  // Borders — crisp, neutral
-  border: '#E2E8F0',       // slate-200
-  borderStrong: '#CBD5E1', // slate-300
+  // Borders — barely-there; depth comes from shadow, not outlines
+  border: '#E8EEFF',
+  borderStrong: '#C7D2FE', // indigo-200
 
-  // Accent — sky blue: fresh, trustworthy, health-forward
-  accent: '#0EA5E9',                       // sky-500
-  accentDim: 'rgba(14, 165, 233, 0.09)',
-  accentBright: '#0284C7',                 // sky-600
+  // Accent — vivid royal blue (deeper and bolder than sky)
+  accent: '#2563EB',                       // blue-600
+  accentDim: 'rgba(37, 99, 235, 0.08)',
+  accentBright: '#1D4ED8',                 // blue-700
 
-  // Text — cool slate (crisp, not warm brown)
-  text: '#0F172A',         // slate-900
-  textSecondary: '#475569', // slate-600
-  textTertiary: '#94A3B8',  // slate-400
+  // Text — rich near-black for strong contrast on white cards
+  text: '#0A1931',
+  textSecondary: '#4B5563', // gray-600
+  textTertiary: '#9CA3AF',  // gray-400
 
-  // Status colours — vivid but balanced
-  normal: '#22C55E',    // green-500 — health-positive, energetic
+  // Status colours
+  normal: '#22C55E',    // green-500
   elevated: '#F59E0B',  // amber-500
-  high: '#EF4444',      // red-500 — clear, readable danger signal
-  low: '#3B82F6',       // blue-500 — harmonises with sky accent
+  high: '#EF4444',      // red-500
+  low: '#6366F1',       // indigo-500 — harmonises with new accent
 
-  // Tab bar — clean white, accent-coloured active state
+  // Tab bar
   tabBar: '#FFFFFF',
-  tabBarBorder: '#E2E8F0',   // slate-200 hairline separator
-  tabActive: '#0EA5E9',      // sky-500 — matches global accent
-  tabInactive: '#94A3B8',    // slate-400
+  tabBarBorder: 'transparent',
+  tabActive: '#2563EB',
+  tabInactive: '#9CA3AF',
 } as const;
 
 export const Spacing = {
@@ -63,24 +63,24 @@ export const FontSize = {
 
 export const Shadow = {
   sm: {
-    shadowColor: '#0F172A',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    elevation: 2,
+    shadowColor: '#2563EB',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    elevation: 3,
   },
   md: {
-    shadowColor: '#0F172A',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.07,
-    shadowRadius: 12,
-    elevation: 4,
+    shadowColor: '#2563EB',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.10,
+    shadowRadius: 16,
+    elevation: 6,
   },
   lg: {
-    shadowColor: '#0F172A',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.10,
-    shadowRadius: 24,
-    elevation: 8,
+    shadowColor: '#2563EB',
+    shadowOffset: { width: 0, height: 12 },
+    shadowOpacity: 0.13,
+    shadowRadius: 28,
+    elevation: 10,
   },
 } as const;
