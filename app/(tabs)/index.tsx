@@ -74,6 +74,16 @@ function zoneForValue(zones: Zone[], value: number) {
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
+function isToday(timestamp: number): boolean {
+  const d = new Date(timestamp);
+  const now = new Date();
+  return (
+    d.getFullYear() === now.getFullYear() &&
+    d.getMonth() === now.getMonth() &&
+    d.getDate() === now.getDate()
+  );
+}
+
 function greeting(): string {
   const h = new Date().getHours();
   if (h < 12) return 'Good morning';
@@ -222,7 +232,7 @@ const quickStyles = StyleSheet.create({
 
 // ─── Metric card ──────────────────────────────────────────────────────────────
 
-function MetricCard({ config, value, hasData }: { config: MetricConfig; value: number; hasData: boolean }) {
+function MetricCard({ config, value, hasData, hasAnyData }: { config: MetricConfig; value: number; hasData: boolean; hasAnyData: boolean }) {
   const router = useRouter();
 
   const zone      = hasData && value > 0 ? zoneForValue(config.zones, value) : undefined;
@@ -265,7 +275,9 @@ function MetricCard({ config, value, hasData }: { config: MetricConfig; value: n
         zones={config.zones} edgeLabels={config.edgeLabels}
       />
       {!hasData && (
-        <Text style={metricStyles.tapHint}>Tap to view history once you've measured</Text>
+        <Text style={metricStyles.tapHint}>
+          {hasAnyData ? 'No reading today — tap to view history' : "Tap to view history once you've measured"}
+        </Text>
       )}
     </TouchableOpacity>
   );
@@ -409,13 +421,16 @@ const wellStyles = StyleSheet.create({
 export default function HomeScreen() {
   const router = useRouter();
   const [latest, setLatest]         = useState<Measurement | null>(null);
+  const [hasAnyData, setHasAnyData] = useState(false);
   const [heartAgeData, setHeartAge] = useState<{ age: number; chronoAge: number } | null>(null);
   const [stressAvg7, setStress7]    = useState<number | null>(null);
 
   useFocusEffect(
     useCallback(() => {
       Promise.all([getMeasurements(), getProfile()]).then(([measurements, profile]) => {
-        setLatest(measurements[0] ?? null);
+        const todayMeasurement = measurements.find((m) => isToday(m.timestamp)) ?? null;
+        setLatest(todayMeasurement);
+        setHasAnyData(measurements.length > 0);
         setHeartAge(computeHeartAge(measurements, profile));
         setStress7(computeStress7(measurements));
       });
@@ -454,7 +469,7 @@ export default function HomeScreen() {
         {METRICS.map((cfg) => {
           const raw  = hasData ? (latest![cfg.id] as number) : 0;
           const show = hasData && raw > 0;
-          return <MetricCard key={cfg.id} config={cfg} value={raw} hasData={show} />;
+          return <MetricCard key={cfg.id} config={cfg} value={raw} hasData={show} hasAnyData={hasAnyData} />;
         })}
 
         {/* Wellness row */}
