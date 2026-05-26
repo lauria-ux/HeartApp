@@ -10,7 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useCallback, useState } from 'react';
 import { useFocusEffect } from 'expo-router';
-import { Colors, Spacing, Radius, FontSize, Shadow } from '@/constants/theme';
+import { Colors, Spacing, Radius, FontSize, FontFamily, Shadow } from '@/constants/theme';
 import { getMeasurements, getProfile } from '@/lib/storage';
 import { type Measurement, type UserProfile } from '@/types/health';
 import BellCurveGauge, { type Zone } from '@/components/BellCurveGauge';
@@ -250,7 +250,9 @@ function MetricCard({ config, value, hasData, hasAnyData }: { config: MetricConf
           <Ionicons name={config.icon} size={16} color={Colors.accent} />
         </View>
         <Text style={metricStyles.label}>{config.label}</Text>
-        <Ionicons name="chevron-forward" size={15} color={Colors.textTertiary} />
+        <View style={metricStyles.arrowBtn}>
+          <Ionicons name="arrow-forward" size={14} color="#fff" />
+        </View>
       </View>
 
       <View style={metricStyles.valueRow}>
@@ -302,12 +304,19 @@ const metricStyles = StyleSheet.create({
   },
   label: {
     flex: 1, fontSize: FontSize.sm, fontWeight: '600',
+    fontFamily: FontFamily.semiBold,
     color: Colors.textSecondary,
     textTransform: 'uppercase', letterSpacing: 0.5,
   },
   valueRow: { flexDirection: 'row', alignItems: 'baseline', marginBottom: 4 },
-  value: { fontSize: 40, fontWeight: '700', color: Colors.text, lineHeight: 44 },
+  value: { fontSize: 40, fontWeight: '700', fontFamily: FontFamily.bold, color: Colors.text, lineHeight: 44 },
   unit:  { fontSize: FontSize.base, fontWeight: '500', color: Colors.textSecondary },
+  arrowBtn: {
+    width: 34, height: 34, borderRadius: 17,
+    backgroundColor: Colors.accent,
+    alignItems: 'center', justifyContent: 'center',
+    ...Shadow.sm,
+  },
   zoneLabel: {
     fontSize: FontSize.xs, fontWeight: '700',
     marginBottom: Spacing.sm,
@@ -499,8 +508,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row', alignItems: 'flex-start',
     justifyContent: 'space-between', marginBottom: Spacing.lg,
   },
-  greeting: { fontSize: FontSize.xxl, fontWeight: '700', color: Colors.text, lineHeight: 36 },
-  date: { fontSize: FontSize.sm, color: Colors.textSecondary, marginTop: 2 },
+  greeting: { fontSize: FontSize.xxl, fontWeight: '700', fontFamily: FontFamily.extraBold, color: Colors.text, lineHeight: 36 },
+  date: { fontSize: FontSize.sm, fontFamily: FontFamily.regular, color: Colors.textSecondary, marginTop: 2 },
   gearBtn: {
     width: 40, height: 40, borderRadius: 20,
     backgroundColor: Colors.card,
@@ -510,6 +519,7 @@ const styles = StyleSheet.create({
 
   sectionLabel: {
     fontSize: FontSize.xs, fontWeight: '700',
+    fontFamily: FontFamily.bold,
     color: Colors.textTertiary,
     textTransform: 'uppercase', letterSpacing: 0.8,
     marginBottom: Spacing.sm, marginTop: Spacing.sm,

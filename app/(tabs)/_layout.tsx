@@ -134,9 +134,9 @@ const styles = StyleSheet.create({
     paddingTop: 8,
     width: '100%',
     borderTopWidth: 0,
-    shadowColor: '#2563EB',
+    shadowColor: '#000000',
     shadowOffset: { width: 0, height: -4 },
-    shadowOpacity: 0.07,
+    shadowOpacity: 0.06,
     shadowRadius: 12,
     elevation: 8,
   },
@@ -155,11 +155,11 @@ const styles = StyleSheet.create({
     width: FAB_SIZE,
     height: FAB_SIZE,
     borderRadius: FAB_SIZE / 2,
-    backgroundColor: Colors.accent,
+    backgroundColor: '#EF4444',        // red — makes the measure action pop
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 4,
-    borderColor: Colors.background,   // matches app background — clean float
+    borderColor: Colors.background,
     ...Shadow.lg,
   },
 });

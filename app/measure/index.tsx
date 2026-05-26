@@ -3,7 +3,7 @@ import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
-import { Colors, Spacing, Radius, FontSize } from '@/constants/theme';
+import { Colors, Spacing, Radius, FontSize, FontFamily, Shadow } from '@/constants/theme';
 import type { MeasurementMode, CameraFacing } from '@/types/health';
 
 export default function MeasureSetupScreen() {
@@ -134,20 +134,19 @@ const styles = StyleSheet.create({
   segmentContainer: {
     flexDirection: 'row',
     backgroundColor: Colors.card,
-    borderRadius: Radius.md,
+    borderRadius: Radius.full,
     padding: 4,
-    borderWidth: 1,
-    borderColor: Colors.border,
+    ...Shadow.sm,
   },
   segment: {
     flex: 1,
     paddingVertical: Spacing.sm + 2,
     alignItems: 'center',
-    borderRadius: Radius.sm,
+    borderRadius: Radius.full,
   },
-  segmentActive: { backgroundColor: Colors.surface },
-  segmentText: { fontSize: FontSize.sm, color: Colors.textSecondary, fontWeight: '500' },
-  segmentTextActive: { color: Colors.text, fontWeight: '600' },
+  segmentActive: { backgroundColor: Colors.accent },
+  segmentText: { fontSize: FontSize.sm, color: Colors.textTertiary, fontWeight: '600' },
+  segmentTextActive: { color: '#FFFFFF', fontWeight: '700' },
   modeHint: {
     fontSize: FontSize.xs,
     color: Colors.textTertiary,

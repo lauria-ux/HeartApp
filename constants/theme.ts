@@ -1,29 +1,29 @@
 export const Colors = {
-  // Backgrounds — soft blue-white base, cards float above it
-  background: '#EEF2FF',   // indigo-50: warm blue tint like the reference
+  // Background — neutral off-white, exactly like the reference (no colour tint)
+  background: '#F5F6FA',
   card: '#FFFFFF',
-  cardAlt: '#F5F7FF',
-  surface: '#E0E7FF',      // indigo-100
+  cardAlt: '#F0F1F5',
+  surface: '#E8E9F0',
 
-  // Borders — barely-there; depth comes from shadow, not outlines
-  border: '#E8EEFF',
-  borderStrong: '#C7D2FE', // indigo-200
+  // Borders — almost invisible; shadow carries the depth
+  border: '#EEEEEE',
+  borderStrong: '#DDDDEA',
 
-  // Accent — vivid royal blue (deeper and bolder than sky)
-  accent: '#2563EB',                       // blue-600
+  // Accent — vivid electric blue matching the reference exactly
+  accent: '#2563EB',
   accentDim: 'rgba(37, 99, 235, 0.08)',
-  accentBright: '#1D4ED8',                 // blue-700
+  accentBright: '#1D4ED8',
 
-  // Text — rich near-black for strong contrast on white cards
-  text: '#0A1931',
-  textSecondary: '#4B5563', // gray-600
-  textTertiary: '#9CA3AF',  // gray-400
+  // Text — rich near-black for maximum contrast on white cards
+  text: '#111111',
+  textSecondary: '#6B7280',
+  textTertiary: '#9CA3AF',
 
   // Status colours
-  normal: '#22C55E',    // green-500
-  elevated: '#F59E0B',  // amber-500
-  high: '#EF4444',      // red-500
-  low: '#6366F1',       // indigo-500 — harmonises with new accent
+  normal: '#22C55E',
+  elevated: '#F59E0B',
+  high: '#EF4444',
+  low: '#6366F1',
 
   // Tab bar
   tabBar: '#FFFFFF',
@@ -61,25 +61,34 @@ export const FontSize = {
   display: 56,
 } as const;
 
+// Inter font family — loaded in app/_layout.tsx
+export const FontFamily = {
+  regular:   'Inter_400Regular',
+  medium:    'Inter_500Medium',
+  semiBold:  'Inter_600SemiBold',
+  bold:      'Inter_700Bold',
+  extraBold: 'Inter_800ExtraBold',
+} as const;
+
 export const Shadow = {
   sm: {
-    shadowColor: '#2563EB',
+    shadowColor: '#000000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
+    shadowOpacity: 0.06,
     shadowRadius: 8,
     elevation: 3,
   },
   md: {
-    shadowColor: '#2563EB',
+    shadowColor: '#000000',
     shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.10,
+    shadowOpacity: 0.09,
     shadowRadius: 16,
     elevation: 6,
   },
   lg: {
-    shadowColor: '#2563EB',
+    shadowColor: '#000000',
     shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.13,
+    shadowOpacity: 0.12,
     shadowRadius: 28,
     elevation: 10,
   },
