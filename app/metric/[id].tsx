@@ -15,7 +15,8 @@ import {
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
+import { useFocusEffect } from 'expo-router';
 import { Colors, Spacing, Radius, FontSize, Shadow } from '@/constants/theme';
 import { getMeasurements } from '@/lib/storage';
 import { type Measurement } from '@/types/health';
@@ -251,19 +252,22 @@ export default function MetricDetailScreen() {
   const [data, setData] = useState<ChartPoint[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    getMeasurements().then((measurements) => {
-      const points = measurements
-        .map((m: Measurement) => ({
-          value: m[metricId] as number,
-          timestamp: m.timestamp,
-        }))
-        .filter((p) => p.value > 0)
-        .reverse(); // oldest first for chart
-      setData(points);
-      setLoading(false);
-    });
-  }, [metricId]);
+  useFocusEffect(
+    useCallback(() => {
+      setLoading(true);
+      getMeasurements().then((measurements) => {
+        const points = measurements
+          .map((m: Measurement) => ({
+            value: m[metricId] as number,
+            timestamp: m.timestamp,
+          }))
+          .filter((p) => p.value > 0)
+          .reverse(); // oldest first for chart
+        setData(points);
+        setLoading(false);
+      });
+    }, [metricId]),
+  );
 
   const latest = data.length > 0 ? data[data.length - 1].value : null;
   const avg    = data.length > 0 ? Math.round(data.reduce((s, p) => s + p.value, 0) / data.length) : 0;

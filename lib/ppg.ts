@@ -168,9 +168,10 @@ export function rrToRMSSD(rrIntervals: number[]): number {
  */
 export function rmssdToStressIndex(rmssd: number): number {
   if (rmssd <= 0) return 75;
-  // Exponential decay: high RMSSD → low stress
+  // Exponential decay: high RMSSD → low stress.
+  // Minimum of 1 so a valid measurement is never confused with "no data" (0).
   const raw = 100 * Math.exp(-rmssd / 35);
-  return Math.round(Math.min(100, Math.max(0, raw)));
+  return Math.max(1, Math.round(Math.min(100, raw)));
 }
 
 /**
